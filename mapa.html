@@ -8,7 +8,43 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <h1>Hola!</h1>
+    <div class="container-main-tracker">
+        <div class="container-tracker">
+            <div class="container-tracker__title">
+                <h1>IP Address Tracker</h1>
+            </div>
+            <form action="" class="container-tracker__search">
+                <div class="container-tracker__search--input">
+                    <input type="text" name="IP" placeholder="Search for any IP address or domain" required class="input-field"/>
+                </div>
+                <button type="submit" class="container-tracker__search--button">
+                    <img src="./assets/img/icon-arrow.svg" alt="icon-right-arrow">
+                </button>
+            </form>
+            <div class="container-tracker__details">
+                <div>
+                    <p>ip address</p>
+                    <h2>192.212.174.101</h2>
+                </div>
+                <div>
+                    <p>location</p>
+                    <h2>Brooklyn, NY 10001</h2>
+                </div>
+                <div>
+                    <p>timezone</p>
+                    <h2>UTC -05:00</h2>
+                </div>
+                <div>
+                    <p>isp</p>
+                    <h2>SpaceX Starlink</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main id="mapa" class="mapa">
+        <p>aca va el mapa</p>
+    </main>
+    
     <script src="./js/mapa.js"></script>
 </body>
 </html>
