@@ -1,28 +1,33 @@
-// L -> LeafLet
-// setView muestra el mapa. Luego [4.639386, -74.082412] representa la latitud (primer parametro) y la longitud (segundo parametro). 6 es el zoom que hago al mapa
+/*------------------------------------------*\
+    #INICIALIZACION DEL MAPA CON LEAFLET JS
+\*------------------------------------------*/
 
-// let map = L.map('map').setView([34.04915, -118.09462],18);
+// Inicializacion del mapa solicitado en mobile/desktop preview
+let map = L.map('mapa').setView([34.04915, -118.09462], 17);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 
-// //Agregar tileLayer mapa base desde openstreetmap
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-// }).addTo(map);
+// Se agrega el icono que indica la ubicacion exacta de la IP por defecto
+let icon = L.icon({
+    iconUrl: '../assets/img/icon-location.svg',
+    iconSize: [46,56],
+    iconAnchor: [32,32]
+});
 
-// //Agregar tileLayer mapa base desde openstreetmap
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-// }).addTo(map);
+L.marker([34.04915, -118.09462], {icon: icon}).addTo(map); // Se crea un marcador (icono) en las coordenadas indicadas y se lo agrega al mapa
 
+/*------------------------------------------*\
+    #OBTENCION DE DATOS DE IPIFY API
+\*------------------------------------------*/
+
+let value = '';
 
 const btnSearch = document.getElementById('btn-search');
 const inputEntered = document.getElementById('input-entered');
 const formInput = document.getElementById('form-input');
 let trackerInfoContainer = document.getElementById('tracker-info');
 
-let value = '';
-
 formInput.addEventListener("submit", e => {
-    e.preventDefault();
+    e.preventDefault(); // Se evita que se recargue la pagina cada vez que envio una direccion de IP
 })
 
 inputEntered.addEventListener("input", () => {
@@ -31,8 +36,7 @@ inputEntered.addEventListener("input", () => {
 
 btnSearch.addEventListener("click", () => {
     loadData(value);
-
-    value = '';
+    inputEntered.value = "";
 })
 
 const loadData = async value => {
@@ -59,41 +63,23 @@ const loadData = async value => {
             <h2>${dataIp.isp}</h2>
         </div> 
     `;
-
-    console.log(dataIp.location.lat);
-    console.log(typeof dataIp.location.lat);
-    console.log(dataIp.location.lng);
-    console.log(typeof dataIp.location.lng);
-
-    cargarMapa(dataIp.location.lat, dataIp.location.lng);
+    
+    loadMap(dataIp.location.lat, dataIp.location.lng);
 }
 
-const cargarMapa = (latitud, longitud) => {
-    const coord = [latitud, longitud]; 
-    let map = L.map('mapa').setView(coord, 20);
-
-    //Agregar tileLayer mapa base desde openstreetmap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    map.flyTo(coord, 20);
+const loadMap = (lat, lng) => {
+    const coord = [lat, lng];
+    map.setView(coord, 17);
+    L.marker(coord, {icon: icon}).addTo(map);  
 }
 
 
+/*---------------------------------------------------------------------------*\
+    #ALGUNAS IP's UTILIZADAS PARA PROBAR EL CORRECTO FUNCIONAMIENTO
 
+    // 181.46.139.172
+    // 8.8.8.8
+    // 192.212.174.101
 
-// const cargarMapa = (latitud, longitud) => {
-//     document.getElementById('mapa').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
-//     let osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', osmAttribution = 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,' + ' <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-//     osmLayer = new L.TileLayer(osmUrl, {maxZoom: 18, attribution: osmAttribution});
-//     var map = new L.Map('map');
-//     map.setView([latitud, longitud], 20);
-//     map.addLayer(osmLayer);
-//     let validatorsLayer = new OsmJs.Weather.LeafletLayer({lang: 'en'});
-//     map.addLayer(validatorsLayer);
-// }
-
-
-
+\*----------------------------------------------------------------------------*/
 
