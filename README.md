@@ -31,7 +31,7 @@
 * [CSS](): Version 3
 * [JavaScript](): Version ES6
 * [GIT](): Version 2.40
-* [Leaflet JS](): Version 2.40
+* [Leaflet JS](): Version 1.9.4
 
 ### Prerequisites
 
