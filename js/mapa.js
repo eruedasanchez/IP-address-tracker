@@ -8,7 +8,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: 
 
 // Se agrega el icono que indica la ubicacion exacta de la IP por defecto
 let icon = L.icon({
-    iconUrl: '../assets/img/icon-location.svg',
+    iconUrl: './assets/img/icon-location.svg',
     iconSize: [46,56],
     iconAnchor: [32,32]
 });
