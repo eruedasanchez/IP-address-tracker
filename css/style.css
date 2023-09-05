@@ -125,10 +125,12 @@ body{
     font-weight: var(--weight-500);
 }
 
-.mapa{
+.map{
     width: 100%;
-    padding-top: 190px;
-    background-color: gray;
+    height: 100vh;
+    z-index: -1;
+    /* padding-top: 210px; */
+    /* background-color: gray; */
 }
 
 @media (min-width: 768px){
